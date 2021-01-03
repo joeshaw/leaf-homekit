@@ -1,7 +1,7 @@
-# leaf-homecontrol
+# leaf-homekit
 
 HomeKit support for the Nissan Leaf using
-[HomeControl](https://github.com/brutella/hc) and my [Leaf Go
+[hc](https://github.com/brutella/hc) and my [Leaf Go
 library](https://github.com/joeshaw/leaf).
 
 When running, this service publishes a single HomeKit accessory
@@ -29,7 +29,7 @@ home hub like an Apple TV or iPad, you can control the Leaf remotely.
 
 The tool can be installed with:
 
-    go get -u github.com/joeshaw/leaf-homecontrol
+    go get -u github.com/joeshaw/leaf-homekit
 
 You will need a configuration file with your Nissan username and
 password.  The format is the same as the config file for the
@@ -45,7 +45,7 @@ password carwingsPassw0rd
 
 Then you can run the service:
 
-    leaf-homecontrol -config ~/.leaf
+    leaf-homekit -config ~/.leaf
 
 The service will make an initial call to the Nissan service to get the
 current battery information -- this can take nearly 30 seconds -- before
@@ -65,7 +65,7 @@ sure the code has been run through `gofmt`.
 
 Copyright 2020 Joe Shaw
 
-`leaf-homecontrol` is licensed under the MIT License.  See the LICENSE
+`leaf-homekit` is licensed under the MIT License.  See the LICENSE
 file for details.
 
 

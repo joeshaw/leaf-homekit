@@ -41,7 +41,7 @@ type config struct {
 func main() {
 	var cfg config
 
-	fs := flag.NewFlagSet("leaf-homecontrol", flag.ExitOnError)
+	fs := flag.NewFlagSet("leaf-homekit", flag.ExitOnError)
 	fs.StringVar(
 		&cfg.storagePath,
 		"storage-path",
