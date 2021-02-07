@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"sync"
 	"time"
 
 	"github.com/brutella/hc"
@@ -25,6 +26,12 @@ type Leaf struct {
 	battery   *service.BatteryService
 	climate   *service.Switch
 	charge    *service.Switch
+
+	// The Leaf API doesn't allow us to see if the climate control is
+	// on.  But it will be on for 15 minutes after we tell it to turn
+	// on, so track the state for that long.
+	climateOn bool
+	climateMu sync.Mutex
 }
 
 type config struct {
@@ -123,7 +130,12 @@ func main() {
 	n.SetValue("Climate Control")
 	l.climate.AddCharacteristic(n.Characteristic)
 	l.climate.On.OnValueRemoteUpdate(l.sendClimateRequest)
-	l.climate.On.OnValueRemoteGet(func() bool { return false })
+	l.climate.On.OnValueRemoteGet(func() bool {
+		l.climateMu.Lock()
+		defer l.climateMu.Unlock()
+
+		return l.climateOn
+	})
 
 	n = characteristic.NewName()
 	n.SetValue("Charging")
@@ -210,19 +222,31 @@ func (l *Leaf) sendChargingRequest(on bool) {
 }
 
 func (l *Leaf) sendClimateRequest(on bool) {
-	// These are stateless switches, always set them to off
-	defer func() {
-		time.Sleep(1 * time.Second)
-		l.climate.On.SetValue(false)
-	}()
+	if on {
+		go func() {
+			time.Sleep(15 * time.Minute)
 
-	if !on {
-		return
-	}
+			l.climateMu.Lock()
+			defer l.climateMu.Unlock()
 
-	log.Println("Sending climate request...")
-	if err := l.session.ClimateOn(); err != nil {
-		log.Printf("Unable to send climate request: %v", err)
+			l.climate.On.SetValue(false)
+			l.climateOn = false
+		}()
+
+		log.Println("Sending climate on request...")
+		if err := l.session.ClimateOn(); err != nil {
+			log.Printf("Unable to send climate on request: %v", err)
+		}
+	} else {
+		log.Println("Sending climate off request...")
+		if err := l.session.ClimateOff(); err != nil {
+			log.Printf("Unable to send climate off request: %v", err)
+		}
 	}
 	log.Println("Successfully sent climate request")
+
+	l.climateMu.Lock()
+	defer l.climateMu.Unlock()
+
+	l.climateOn = on
 }
