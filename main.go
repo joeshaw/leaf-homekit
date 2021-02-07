@@ -79,7 +79,7 @@ func main() {
 	}
 
 	log.Println("Connecting to NissanConnect service")
-	vehicle, batteryRecord, err := s.Login()
+	vehicle, batteryRecord, _, err := s.Login()
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -181,7 +181,7 @@ func (l *Leaf) updateBatteryLoop(ctx context.Context, interval time.Duration) {
 			return
 		case <-t.C:
 			log.Println("Updating battery information")
-			br, err := l.session.BatteryStatus()
+			br, _, err := l.session.ChargingStatus()
 			if err != nil {
 				log.Printf("Error updating battery info: %v", err)
 			} else {
