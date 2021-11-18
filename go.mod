@@ -4,7 +4,7 @@ go 1.17
 
 require (
 	github.com/brutella/hc v1.2.3
-	github.com/joeshaw/leaf v0.0.0-20211012152558-bcce881fe9c3
+	github.com/joeshaw/leaf v0.0.0-20211118164044-9e6897efcdbc
 	github.com/peterbourgon/ff/v3 v3.0.0
 )
 
