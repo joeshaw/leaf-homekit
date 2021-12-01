@@ -10,6 +10,8 @@ github.com/joeshaw/leaf v0.0.0-20211012152558-bcce881fe9c3 h1:ijZ3VE9CLjPyZQLlaG
 github.com/joeshaw/leaf v0.0.0-20211012152558-bcce881fe9c3/go.mod h1:nSnOuL6P92zXnCWZNxrGCQcoGBSdG+t2AaJVfFlCWjU=
 github.com/joeshaw/leaf v0.0.0-20211118164044-9e6897efcdbc h1:oy1DdtVDt9ech4Gj+Btj/kmMZFWqwoaInUZEKDtuPjs=
 github.com/joeshaw/leaf v0.0.0-20211118164044-9e6897efcdbc/go.mod h1:nSnOuL6P92zXnCWZNxrGCQcoGBSdG+t2AaJVfFlCWjU=
+github.com/joeshaw/leaf v0.0.0-20211201155100-50c5d356148d h1:ka9o2AlfwTQhgly7OKheeEa68J+wRf3mLNprBM0/M7A=
+github.com/joeshaw/leaf v0.0.0-20211201155100-50c5d356148d/go.mod h1:nSnOuL6P92zXnCWZNxrGCQcoGBSdG+t2AaJVfFlCWjU=
 github.com/miekg/dns v1.1.1/go.mod h1:W1PPwlIAgtquWBMBEV9nkV9Cazfe8ScdGz/Lj7v3Nrg=
 github.com/miekg/dns v1.1.4 h1:rCMZsU2ScVSYcAsOXgmC6+AKOK+6pmQTOcw03nfwYV0=
 github.com/miekg/dns v1.1.4/go.mod h1:W1PPwlIAgtquWBMBEV9nkV9Cazfe8ScdGz/Lj7v3Nrg=
