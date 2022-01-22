@@ -111,6 +111,10 @@ func main() {
 		charge:    service.NewSwitch(),
 	}
 
+	l.accessory.OnIdentify(func() {
+		s.FlashLights()
+	})
+
 	l.accessory.AddService(l.battery.Service)
 	l.accessory.AddService(l.climate.Service)
 	l.accessory.AddService(l.charge.Service)
